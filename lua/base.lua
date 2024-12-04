@@ -14,9 +14,17 @@ vim.o.timeoutlen = 400
 vim.o.updatetime = 400
 
 vim.o.incsearch = true
+vim.o.hlsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.hlsearch = true
 
 vim.o.clipboard = 'unnamedplus'
 vim.o.mouse = ''
+
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.scrolloff = 10
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
