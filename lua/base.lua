@@ -10,8 +10,8 @@ vim.o.matchtime = 1
 
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 10
-vim.o.timeoutlen = 400
-vim.o.updatetime = 400
+vim.o.timeoutlen = 500
+vim.o.updatetime = 500
 
 vim.o.incsearch = true
 vim.o.hlsearch = true
