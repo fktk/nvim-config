@@ -1,10 +1,19 @@
 return {
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
   {
-    'folke/tokyonight.nvim',
+    'neanias/everforest-nvim',
+    version = false,
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
+      require('everforest').setup()
     end,
   },
   {
@@ -216,11 +225,10 @@ return {
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = 'nvim_lsp' },
-          { name = 'path' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'copilot' },
+          { name = 'nvim_lsp', max_item_count = 15, keyword_length = 2 },
+          { name = 'path', max_item_count = 5, keyword_length = 2 },
+          { name = 'buffer', max_item_count = 5, keyword_length = 2 },
+          { name = 'copilot', max_item_count = 3, keyword_length = 2 },
         },
       }
 

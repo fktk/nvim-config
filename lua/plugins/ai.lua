@@ -94,4 +94,41 @@ return {
   --     },
   --   },
   -- }
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      debug = true,
+      window = {
+        layout = 'float',
+        relative = 'editor',
+      },
+      prompts = {
+        Explain = {
+          prompt = "/COPILOT_EXPLAIN 選択されたコードの説明を段落をつけて書いてください。",
+        },
+        Review = {
+          prompt = "/COPILOT_REVIEW 選択されたコードをレビューしてください。",
+          callback = function(response, source) end,
+        },
+        Fix = {
+          prompt = "/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き直してください。",
+        },
+        Optimize = {
+          prompt = "/COPILOT_REFACTOR 選択されたコードを最適化してパフォーマンスと可読性を向上させてください。",
+        },
+        Docs = {
+          prompt = "/COPILOT_DOCS 選択されたコードに対してドキュメンテーションコメントを追加してください。",
+        },
+        Tests = {
+          prompt = "/COPILOT_TESTS 選択されたコードの詳細な単体テスト関数を書いてください。",
+        },
+      },
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
 }
