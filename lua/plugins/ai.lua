@@ -6,22 +6,36 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = {
       -- add any opts here
-      provider = 'copilot',
+      -- provider = 'copilot',
+      provider = 'groq',
       auto_suggestions_provider = 'copilot',
-      openai = {
-        endpoint = 'http://localhost:8000/v1',
-        allow_insecure = true,
+      cursor_applying_provider = 'groq',
+     vendors = {
+        groq = {
+          __inherited_from = 'openai',
+          api_key_name = 'GROQ_API_KEY',
+          endpoint = 'https://api.groq.com/openai/v1/',
+          model = 'llama-3.3-70b-versatile',
+          max_tokens = 32768,
+        },
+        ollama = {
+          __inherited_from = 'openai',
+          api_key_name = 'dummy',
+          endpoint = 'http://localhot:11434/v1',
+          model = 'qwen2.5:q4',
+        },
       },
       behaviour = {
-        auto_suggestions = false,
+        auto_suggestions = true,
         auto_apply_diff_after_generation = true,
+        enabled_cursor_planning_mode = true,
       },
       windows = {
         edit = {
           start_insert = false,
         },
         ask = {
-          start_insert = false,
+          start_insert = true,
         }
       },
     },
@@ -29,6 +43,7 @@ return {
     build = "make",
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
+      'nvim-treesitter/nvim-treesitter',
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",

@@ -29,3 +29,5 @@ vim.opt.scrolloff = 10
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.o.laststatus = 3
