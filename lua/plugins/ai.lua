@@ -6,11 +6,15 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = {
       -- add any opts here
-      -- provider = 'copilot',
-      provider = 'groq',
+      provider = 'copilot',
+      -- provider = 'groq',
       auto_suggestions_provider = 'copilot',
-      cursor_applying_provider = 'groq',
-     vendors = {
+      cursor_applying_provider = 'copilot',
+      copilot = {
+        -- model = 'gpt-4.1',
+        -- model = 'claude-3.5-sonnet',
+      },
+      vendors = {
         groq = {
           __inherited_from = 'openai',
           api_key_name = 'GROQ_API_KEY',
@@ -29,6 +33,12 @@ return {
         auto_suggestions = true,
         auto_apply_diff_after_generation = true,
         enabled_cursor_planning_mode = true,
+      },
+      mappings = {
+        submit = {
+          normal = "<C-s>",
+          insert = "<C-s>",
+        },
       },
       windows = {
         edit = {
