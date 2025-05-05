@@ -6,31 +6,50 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = {
       -- add any opts here
+      system_prompt = function()
+        local hub = require('mcphub').get_hub_instance()
+        return hub:get_active_servers_prompt()
+      end,
+      custom_tools = function()
+        return {
+          require('mcphub.extensions.avante').mcp_tool(),
+        }
+      end,
+      disabled_tools = {
+        "list_files",
+        "search_files",
+        "read_file",
+        "create_file",
+        "rename_file",
+        "delete_file",
+        "create_dir",
+        "rename_dir",
+        "delete_dir",
+        "bash",
+      },
+      -- provider = 'copilot',
       provider = 'copilot',
-      -- provider = 'groq',
-      auto_suggestions_provider = 'copilot',
+      -- auto_suggestions_provider = 'copilot',
+      -- cursor_applying_provider = 'copilot',
       cursor_applying_provider = 'copilot',
       copilot = {
-        -- model = 'gpt-4.1',
+        model = 'gpt-4.1',
         -- model = 'claude-3.5-sonnet',
+      },
+      gemini = {
+        model = 'gemini-1.5-flash',
       },
       vendors = {
         groq = {
           __inherited_from = 'openai',
           api_key_name = 'GROQ_API_KEY',
           endpoint = 'https://api.groq.com/openai/v1/',
-          model = 'llama-3.3-70b-versatile',
-          max_tokens = 32768,
-        },
-        ollama = {
-          __inherited_from = 'openai',
-          api_key_name = 'dummy',
-          endpoint = 'http://localhot:11434/v1',
-          model = 'qwen2.5:q4',
+          model = 'meta-llama/llama-4-scout-17b-16e-instruct',
+          max_tokens = 8192,
         },
       },
       behaviour = {
-        auto_suggestions = true,
+        auto_suggestions = false,
         auto_apply_diff_after_generation = true,
         enabled_cursor_planning_mode = true,
       },
@@ -42,7 +61,7 @@ return {
       },
       windows = {
         edit = {
-          start_insert = false,
+          start_insert = true,
         },
         ask = {
           start_insert = true,
@@ -88,5 +107,25 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+    -- config = function(_, opts)
+    --   require('avante').setup({
+    --   })
+    -- end,
+  },
+  {
+    'ravitemer/mcphub.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    build = 'npm install -g mcp-hub@latest',
+    config = function()
+      require('mcphub').setup({
+        extensions = {
+          avante = {
+            make_slash_commands = true,
+          }
+        }
+      })
+    end,
   },
 }
