@@ -8,7 +8,7 @@ return {
       -- add any opts here
       system_prompt = function()
         local hub = require('mcphub').get_hub_instance()
-        return hub:get_active_servers_prompt()
+        return hub:get_active_servers_prompt() or ""
       end,
       custom_tools = function()
         return {
@@ -26,6 +26,7 @@ return {
         "rename_dir",
         "delete_dir",
         "bash",
+        -- "replace_in_file"
       },
       -- provider = 'copilot',
       provider = 'copilot',
@@ -33,8 +34,9 @@ return {
       -- cursor_applying_provider = 'copilot',
       cursor_applying_provider = 'copilot',
       copilot = {
-        model = 'gpt-4.1',
-        -- model = 'claude-3.5-sonnet',
+        -- model = 'gpt-4.1',
+        model = 'claude-3.5-sonnet',
+        -- disable_tools = true,
       },
       gemini = {
         model = 'gemini-1.5-flash',
@@ -55,8 +57,8 @@ return {
       },
       mappings = {
         submit = {
-          normal = "<C-s>",
-          insert = "<C-s>",
+          normal = "<C-l>",
+          insert = "<C-l>",
         },
       },
       windows = {
@@ -65,7 +67,8 @@ return {
         },
         ask = {
           start_insert = true,
-        }
+        },
+        width = 80,
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -124,7 +127,13 @@ return {
           avante = {
             make_slash_commands = true,
           }
-        }
+        },
+        log = {
+          level = vim.log.levels.TRACE,
+          to_file = true,
+          file_path = '/home/tk/projects/mcp/mcp.log'
+        },
+        auto_approve = true,
       })
     end,
   },

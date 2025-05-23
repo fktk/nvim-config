@@ -6,6 +6,7 @@ return {
     priority = 1000,
     config = function()
       require('everforest').setup()
+      require('everforest').load()
     end,
   },
   {
@@ -222,6 +223,10 @@ return {
       { 'zbirenbaum/copilot-cmp', config=true, event='InsertEnter' },
     },
     config = function()
+        vim.lsp.config('*', {
+          capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        })
+
       -- See `:help cmp`
       local cmp = require 'cmp'
 
