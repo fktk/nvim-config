@@ -10,13 +10,6 @@ return {
     end,
   },
   {
-    'sarrisv/readermode.nvim',
-    opts = {
-      enaled = true,
-      keymap = '<leader>R',
-    }
-  },
-  {
     "hat0uma/csvview.nvim",
     ---@module "csvview"
     ---@type CsvView.Options
@@ -57,16 +50,17 @@ return {
     end,
   },
   {
-    'echasnovski/mini.surround',
-    version = '*',
-    config = function()
-      require('mini.surround').setup()
-    end,
-  },
-  {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
-    config = true,
+    config = function()
+      require('lualine').setup({
+        sections = {
+          lualine_x = {
+            { require('mcphub.extensions.lualine')},
+          }
+        }
+      })
+    end,
   },
   { 'tpope/vim-sleuth' },
   {
