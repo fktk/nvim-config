@@ -266,7 +266,7 @@ return {
         },{
             { name = 'cmdline' },
           }),
-        matching = { disallow_symbol_nonprefix_matchin = false}
+        matching = { disallow_symbol_nonprefix_matching = false}
       })
 
     end,
