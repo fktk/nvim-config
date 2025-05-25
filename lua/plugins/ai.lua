@@ -9,7 +9,18 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    init = function()
+      require('plugins.codecompanion.fidget-spinner'):init()
+    end,
     opts = {
+      opts = { language = 'Japanese'},
+      display = {
+        chat = {
+          window = {
+            position = 'right',
+          },
+        },
+      },
       extensions = {
         mcphub = {
           callback = 'mcphub.extensions.codecompanion',
@@ -19,6 +30,9 @@ return {
             show_result_in_chat = true,
           },
         },
+        history = {
+          enabled = true,
+        }
       },
       strategies = {
         chat = {
@@ -33,7 +47,15 @@ return {
           },
         },
         inline = {
-          adapter = 'copilot'
+          adapter = 'copilot',
+          keymaps = {
+            send = {
+              modes = {
+                i = { "<C-l>" },
+                n = { "<C-l>" },
+              },
+            },
+          },
         },
         cmd = {
           adapter = 'copilot'
@@ -44,7 +66,8 @@ return {
           return require('codecompanion.adapters').extend('copilot', {
             schema = {
               model = {
-                default = "gpt-4.1",
+                -- default = "gpt-4.1",
+                default = "claude-3.5-sonnet",
               },
             },
           })
@@ -59,9 +82,13 @@ return {
       'nvim-telescope/telescope.nvim',
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
+      'j-hui/fidget.nvim',
       {
         'ravitemer/mcphub.nvim',
         dependencies = { 'nvim-lua/plenary.nvim', },
+      },
+      {
+        'ravitemer/codecompanion-history.nvim',
       },
       {
         -- support for image pasting
@@ -78,15 +105,15 @@ return {
           }
         },
       },
-      {
-        'echasnovski/mini.diff',
-        config = function()
-          local diff = require('mini.diff')
-          diff.setup({
-            source = diff.gen_source.none(),
-          })
-        end,
-      },
+      -- {
+      --   'echasnovski/mini.diff',
+      --   config = function()
+      --     local diff = require('mini.diff')
+      --     diff.setup({
+      --       source = diff.gen_source.none(),
+      --     })
+      --   end,
+      -- },
       {
         -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
