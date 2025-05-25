@@ -54,11 +54,11 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function()
       require('lualine').setup({
-        sections = {
-          lualine_x = {
-            { require('mcphub.extensions.lualine')},
-          }
-        }
+        -- sections = {
+        --   lualine_x = {
+        --     { require('mcphub.extensions.lualine')},
+        --   }
+        -- }
       })
     end,
   },

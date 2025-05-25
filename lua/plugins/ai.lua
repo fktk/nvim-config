@@ -1,10 +1,20 @@
 return {
   {
     'ravitemer/mcphub.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim', },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-lualine/lualine.nvim',
+    },
     build = 'npm install -g mcp-hub@latest',
     config = function()
       require('mcphub').setup()
+      require('lualine').setup({
+        sections = {
+          lualine_x = {
+            { require('mcphub.extensions.lualine')},
+          }
+        }
+      })
     end,
   },
   {
