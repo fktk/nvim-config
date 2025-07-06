@@ -7,7 +7,7 @@ vim.o.smartindent = true
 vim.o.number = true
 vim.o.showmatch = true
 vim.o.matchtime = 1
-vim.wo.wrap = false
+vim.wo.wrap = true
 
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 10

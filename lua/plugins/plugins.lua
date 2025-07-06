@@ -10,6 +10,9 @@ return {
     end,
   },
   {
+    'djoshea/vim-autoread',
+  },
+  {
     'sarrisv/readermode.nvim',
     opts = {
       enaled = true,

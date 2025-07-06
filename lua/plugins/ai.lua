@@ -15,39 +15,28 @@ return {
           require('mcphub.extensions.avante').mcp_tool(),
         }
       end,
-      disabled_tools = {
-        "list_files",
-        "search_files",
-        "read_file",
-        "create_file",
-        "rename_file",
-        "delete_file",
-        "create_dir",
-        "rename_dir",
-        "delete_dir",
-        "bash",
-        -- "replace_in_file"
-      },
       -- provider = 'copilot',
       provider = 'copilot',
       -- auto_suggestions_provider = 'copilot',
       -- cursor_applying_provider = 'copilot',
       cursor_applying_provider = 'copilot',
-      copilot = {
-        -- model = 'gpt-4.1',
-        model = 'claude-3.5-sonnet',
-        -- disable_tools = true,
-      },
-      gemini = {
-        model = 'gemini-1.5-flash',
-      },
-      vendors = {
-        groq = {
-          __inherited_from = 'openai',
-          api_key_name = 'GROQ_API_KEY',
-          endpoint = 'https://api.groq.com/openai/v1/',
-          model = 'meta-llama/llama-4-scout-17b-16e-instruct',
-          max_tokens = 8192,
+      providers = {
+        copilot = {
+          -- model = 'gpt-4.1',
+          model = 'claude-3.5-sonnet',
+          -- disable_tools = true,
+        },
+        gemini = {
+          model = 'gemini-1.5-flash',
+        },
+        vendors = {
+          groq = {
+            __inherited_from = 'openai',
+            api_key_name = 'GROQ_API_KEY',
+            endpoint = 'https://api.groq.com/openai/v1/',
+            model = 'meta-llama/llama-4-scout-17b-16e-instruct',
+            max_tokens = 8192,
+          },
         },
       },
       behaviour = {
