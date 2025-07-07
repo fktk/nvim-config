@@ -1,12 +1,21 @@
 return {
   init_options = {
     documentFormatting = true,
-    dokumentRangeFormatting = true,
+    documentRangeFormatting = true,
+    hover = true,
+    documentSymbol = true,
+    completion = true,
   },
   settings = {
-    rootMarkers = {'.git/'},
+    rootMarkers = {'.git/', '.textlintrc.json'},
     languages = {
-      textlint = { },
+      markdown = {
+        {
+          lintCommand = "npx -g textlint --format unix --stdin --stdin-filename ${INPUT}",
+          lintFormats = "%f:%l:%n: %m",
+          formatStdin = true,
+        }
+      },
     },
   },
   filetypes = { 'markdown' },
