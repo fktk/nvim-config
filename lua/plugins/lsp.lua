@@ -23,4 +23,25 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = true,
   },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function()
+      local null_ls = require('null-ls')
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.textlint.with({
+            filetypes = {'markdown'},
+            diagnostic_config = {
+              underline = false,
+              virtual_text = true,
+            },
+            condition = function(utils)
+              return utils.root_has_file({ '.textlintrc.json'})
+            end,
+          }),
+        }
+      })
+    end,
+  }
 }
