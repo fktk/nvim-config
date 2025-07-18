@@ -8,26 +8,26 @@ return {
       -- add any opts here
       system_prompt = function()
         local hub = require('mcphub').get_hub_instance()
-        return hub:get_active_servers_prompt() or ""
+        return hub and hub:get_active_servers_prompt() or ""
       end,
       custom_tools = function()
         return {
           require('mcphub.extensions.avante').mcp_tool(),
         }
       end,
-      -- provider = 'copilot',
       provider = 'copilot',
-      -- auto_suggestions_provider = 'copilot',
-      -- cursor_applying_provider = 'copilot',
       cursor_applying_provider = 'copilot',
       providers = {
         copilot = {
           -- model = 'gpt-4.1',
-          model = 'claude-3.5-sonnet',
+          model = function()
+            if vim.fn.has('win32') == 1 then
+              return "claude-sonnet-4"
+            else
+              return 'claude-3.5-sonnet'
+            end
+          end,
           -- disable_tools = true,
-        },
-        gemini = {
-          model = 'gemini-1.5-flash',
         },
         vendors = {
           groq = {
@@ -61,8 +61,13 @@ return {
       },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    build = function()
+      if vim.fn.has('win32') == 1 then
+        return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+      else
+        return 'make'
+      end
+    end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       "stevearc/dressing.nvim",
@@ -94,9 +99,9 @@ return {
         -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
-          file_types = { "markdown", "Avante" },
+          file_types = { "Avante" },
         },
-        ft = { "markdown", "Avante" },
+        ft = { "Avante" },
       },
     },
     -- config = function(_, opts)
