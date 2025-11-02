@@ -274,9 +274,12 @@ return {
       fuzzy = { implementation = "prefer_rust_with_warning" },
       cmdline = {
         keymap = { preset = 'inherit' },
-        completion = { menu = { auto_show = true } },
+        completion = {
+          menu = { auto_show = true },
+          list = { selection = { preselect = false } },
+        },
       },
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
   }
 }
