@@ -15,7 +15,9 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = 'copilot',
+      provider = vim.fn.has("win32") ~= 0
+        and "copilot"
+        or "gemini-cli",
       providers = {
         copilot = {
           -- model = 'gpt-4.1',
@@ -24,6 +26,16 @@ return {
             or "claude-3.5-sonnet",
         },
       },
+      acp_providers = {
+        ['gemini-cli'] = {
+          command = 'gemini',
+          args = { '--experimental-acp'},
+          env = {
+            NODE_NO_WARNINGS = '1',
+            GEMINI_API_KEY = os.getenv("GEMINI_API_KEY"),
+          }
+        }
+      }
     },
     behaviour = {
       auto_suggestions = false,
