@@ -13,6 +13,15 @@ return {
     },
   },
   { 'Bilal2453/luvit-meta', lazy = true },
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+      vim.diagnostic.config({ virtual_text = false })
+    end,
+  },
   { 'mason-org/mason.nvim', opts = {} },
   {
     'mason-org/mason-lspconfig.nvim',

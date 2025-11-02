@@ -10,16 +10,6 @@ return {
     end,
   },
   {
-    'djoshea/vim-autoread',
-  },
-  {
-    'sarrisv/readermode.nvim',
-    opts = {
-      enaled = true,
-      keymap = '<leader>R',
-    }
-  },
-  {
     "hat0uma/csvview.nvim",
     ---@module "csvview"
     ---@type CsvView.Options
@@ -56,6 +46,20 @@ return {
         chunk = {
           enable = true,
         },
+      })
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    config = function()
+      require('treesitter-context').setup({
+      })
+    end,
+  },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup({
       })
     end,
   },
